@@ -42,12 +42,3 @@ cd frontend
 npm run build
 # Output is in frontend/dist/
 ```
-
-## GitHub Pages Setup
-
-This repo includes a GitHub Actions workflow (`.github/workflows/deploy.yml`) that automatically builds and deploys to GitHub Pages on every push to `main`.
-
-To enable it:
-1. Go to your repo **Settings → Pages**
-2. Under **Source**, select **GitHub Actions**
-3. Push to `main` — the workflow will handle the rest
