@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invalid Permissions</title>
+    <style>
+        :root {
+            --background: 0 0% 11%; /* #1c1c1c */
+            --foreground: 47 55% 95%; /* #f5f3ed */
+            --card: 0 0% 14%; /* #242424 */
+            --card-foreground: 47 55% 95%; /* #f5f3ed */
+            --secondary: 0 0% 27%; /* #444444 */
+            --secondary-foreground: 47 55% 95%;
+            --primary: 44 53% 72%; /* #dfd7af */
+            --primary-foreground: 0 0% 11%;
+            --border: 0 0% 27%;
+            --radius: 0.5rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scrollbar-gutter: stable;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background-color: hsl(var(--background));
+            color: hsl(var(--foreground));
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-feature-settings: "rlig" 1, "calt" 1;
+            scrollbar-gutter: stable;
+            position: relative;
+            opacity: 0;
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .grid-bg {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(to right, rgba(68, 68, 68, 0.125) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(68, 68, 68, 0.125) 1px, transparent 1px);
+            background-size: 24px 24px;
+            pointer-events: none;
+        }
+
+        .radial-gradient {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle 800px at 50% -100px, rgba(223, 215, 175, 0.063), transparent);
+            pointer-events: none;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 28rem;
+            position: relative;
+            z-index: 10;
+            background-color: hsl(var(--card) / 0.95);
+            color: hsl(var(--card-foreground));
+            border-radius: calc(var(--radius));
+            border: 1px solid hsl(var(--secondary));
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .card-header {
+            display: flex;
+            flex-direction: column;
+            gap: 0.375rem;
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1;
+            letter-spacing: -0.025em;
+            margin: 0;
+        }
+
+        .card-content {
+            padding: 0 1.5rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            color: hsl(var(--foreground) / 0.7);
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            border-radius: calc(var(--radius) - 2px);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: background-color 0.15s ease-in-out;
+            cursor: pointer;
+            width: 100%;
+            height: 2.5rem;
+            padding: 0.5rem 1rem;
+            background-color: hsl(var(--primary) / 0.2);
+            color: hsl(var(--primary));
+            border: 1px solid hsl(var(--primary) / 0.3);
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: hsl(var(--primary) / 0.3);
+        }
+
+        .button:focus-visible {
+            outline: 2px solid hsl(var(--primary));
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <div class="radial-gradient"></div>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Invalid Permissions</h3>
+        </div>
+        <div class="card-content">
+            <p class="message">You don't have permission to access this area. There's no reason to be here if you're not authorized.</p>
+            <a href="/auth/logout" class="button">Logout</a>
+        </div>
+    </div>
+</body>
+</html>
