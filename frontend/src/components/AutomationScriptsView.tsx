@@ -110,8 +110,9 @@ export function AutomationScriptsView() {
         ))}
       </div>
 
-      <Dialog open={showCreateDialog} onOpenChange={(open) => { setShowCreateDialog(open); if (!open) resetForm() }} modal={true}>
-        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto" onEscapeKeyDown={() => setShowCreateDialog(false)}>
+      {showCreateDialog && (
+      <Dialog open={true} onOpenChange={(open) => { if (!open) { setShowCreateDialog(false); resetForm() } }}>
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Create Automation Script</DialogTitle>
             <DialogDescription>Write a JavaScript function to automatically flag or suppress detections</DialogDescription>
@@ -127,14 +128,16 @@ export function AutomationScriptsView() {
             </div>
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setShowCreateDialog(false)}>Cancel</Button>
+            <Button variant="outline" onClick={() => { setShowCreateDialog(false); resetForm() }}>Cancel</Button>
             <Button onClick={handleCreate}>Create Script</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
+      )}
 
-      <Dialog open={showEditDialog} onOpenChange={(open) => { setShowEditDialog(open); if (!open) { setSelectedScript(null); resetForm() } }} modal={true}>
-        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto" onEscapeKeyDown={() => setShowEditDialog(false)}>
+      {showEditDialog && (
+      <Dialog open={true} onOpenChange={(open) => { if (!open) { setShowEditDialog(false); setSelectedScript(null); resetForm() } }}>
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Edit Automation Script</DialogTitle>
             <DialogDescription>Modify the script configuration and code</DialogDescription>
@@ -150,24 +153,27 @@ export function AutomationScriptsView() {
             </div>
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setShowEditDialog(false)}>Cancel</Button>
+            <Button variant="outline" onClick={() => { setShowEditDialog(false); setSelectedScript(null); resetForm() }}>Cancel</Button>
             <Button onClick={handleEdit}>Save Changes</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
+      )}
 
-      <Dialog open={showDeleteDialog} onOpenChange={(open) => { setShowDeleteDialog(open); if (!open) setSelectedScript(null) }}>
+      {showDeleteDialog && (
+      <Dialog open={true} onOpenChange={(open) => { if (!open) { setShowDeleteDialog(false); setSelectedScript(null) } }}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Delete Script</DialogTitle>
             <DialogDescription>Are you sure you want to delete "{selectedScript?.script_name}"? This action cannot be undone.</DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setShowDeleteDialog(false)}>Cancel</Button>
+            <Button variant="outline" onClick={() => { setShowDeleteDialog(false); setSelectedScript(null) }}>Cancel</Button>
             <Button variant="destructive" onClick={handleDelete}>Delete</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
+      )}
     </div>
   )
 }
